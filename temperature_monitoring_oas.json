@@ -1,0 +1,241 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ATLAS temperature_monitoring Service Template",
+    "description": "API description for service monitoring field temperature",
+    "version": "0.1.0"
+  },
+  "tags": [
+    {
+      "name": "Temperature Monitoring"
+    }
+  ],
+  "paths": {
+    "/calculate-gdds": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Temperature Monitoring"
+        ],
+        "summary": "Retrieve Growing Degree Days",
+        "requestBody": {
+          "description": "GDD is an indicator for assessing crop development. It is a measure of heat accumulation (based on air temperature) used to predict plant and pest development rates such as the date that a crop reaches maturity.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_unique_ref_code": {
+                    "type": "number",
+                    "description": "Field unique reference code"
+                  },
+                  "base_temperature": {
+                    "type": "number",
+                    "description": "Minimum development threshold temperature"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "description": "Start of the growing season in ISO Datetime Format"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "description": "End of the growing season in ISO Datetime Format"
+                  }
+                },
+                "required": [
+                  "field_unique_ref_code",
+                  "base_temperature",
+                  "start_date",
+                  "end_date"
+                ],
+                "example": {
+                  "field_unique_ref_code": "3933931894011",
+                  "base_temperature": 5.0,
+                  "start_date": "2021-04-01T00:00:00.000000Z",
+                  "end_date": "2021-05-31T23:59:59.000000Z"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/gdd"
+                  },
+                  "example": [{"gdhs_cumulative":7.86915310141346,"time":"2021-04-01"},{"gdhs_cumulative":19.988090250361218,"time":"2021-04-02"},{"gdhs_cumulative":34.26454512438278,"time":"2021-04-03"},{"gdhs_cumulative":46.6387134355422,"time":"2021-04-04"},{"gdhs_cumulative":53.69176567253996,"time":"2021-04-05"},{"gdhs_cumulative":64.44831830101002,"time":"2021-04-06"},{"gdhs_cumulative":77.02955545158827,"time":"2021-04-07"},{"gdhs_cumulative":82.02108552007492,"time":"2021-04-08"},{"gdhs_cumulative":88.43415286626387,"time":"2021-04-09"},{"gdhs_cumulative":96.59258388349797,"time":"2021-04-10"},{"gdhs_cumulative":106.84997056361587,"time":"2021-04-11"},{"gdhs_cumulative":119.18749662845646,"time":"2021-04-12"},{"gdhs_cumulative":132.38959913950703,"time":"2021-04-13"},{"gdhs_cumulative":145.65856188540297,"time":"2021-04-14"},{"gdhs_cumulative":156.62614307203378,"time":"2021-04-15"},{"gdhs_cumulative":165.2593223706561,"time":"2021-04-16"},{"gdhs_cumulative":174.49777343440496,"time":"2021-04-17"},{"gdhs_cumulative":186.70206284183965,"time":"2021-04-18"},{"gdhs_cumulative":199.49331969157154,"time":"2021-04-19"},{"gdhs_cumulative":211.24683569432017,"time":"2021-04-20"},{"gdhs_cumulative":223.72897462153313,"time":"2021-04-21"},{"gdhs_cumulative":237.30358226512274,"time":"2021-04-22"},{"gdhs_cumulative":249.808177817608,"time":"2021-04-23"},{"gdhs_cumulative":249.808177817608,"time":"2021-04-24"},{"gdhs_cumulative":249.808177817608,"time":"2021-04-25"},{"gdhs_cumulative":264.1223109385516,"time":"2021-04-26"},{"gdhs_cumulative":278.5883978836489,"time":"2021-04-27"},{"gdhs_cumulative":293.724822428916,"time":"2021-04-28"},{"gdhs_cumulative":293.724822428916,"time":"2021-04-29"},{"gdhs_cumulative":293.724822428916,"time":"2021-04-30"},{"gdhs_cumulative":314.92607916748784,"time":"2021-05-01"},{"gdhs_cumulative":338.65290144243704,"time":"2021-05-02"},{"gdhs_cumulative":359.40151148537836,"time":"2021-05-03"},{"gdhs_cumulative":376.324773800319,"time":"2021-05-04"},{"gdhs_cumulative":394.6841632289634,"time":"2021-05-05"},{"gdhs_cumulative":414.92368841602115,"time":"2021-05-06"},{"gdhs_cumulative":434.85859803583173,"time":"2021-05-07"},{"gdhs_cumulative":454.5454291552619,"time":"2021-05-08"},{"gdhs_cumulative":469.25828797441693,"time":"2021-05-09"},{"gdhs_cumulative":484.72851533738947,"time":"2021-05-10"},{"gdhs_cumulative":501.91593218006255,"time":"2021-05-11"},{"gdhs_cumulative":520.4469257508965,"time":"2021-05-12"},{"gdhs_cumulative":541.0321290631124,"time":"2021-05-13"},{"gdhs_cumulative":559.4347567024295,"time":"2021-05-14"},{"gdhs_cumulative":574.5596985916007,"time":"2021-05-15"},{"gdhs_cumulative":592.8089007794786,"time":"2021-05-16"},{"gdhs_cumulative":614.1624941301066,"time":"2021-05-17"},{"gdhs_cumulative":635.5033388323561,"time":"2021-05-18"},{"gdhs_cumulative":657.8585004762674,"time":"2021-05-19"},{"gdhs_cumulative":677.4082602020786,"time":"2021-05-20"},{"gdhs_cumulative":693.8097422493381,"time":"2021-05-21"},{"gdhs_cumulative":713.2663210030325,"time":"2021-05-22"},{"gdhs_cumulative":735.5464622126738,"time":"2021-05-23"},{"gdhs_cumulative":760.220766433499,"time":"2021-05-24"},{"gdhs_cumulative":783.6200866643845,"time":"2021-05-25"},{"gdhs_cumulative":806.3730558522457,"time":"2021-05-26"},{"gdhs_cumulative":828.9924859234376,"time":"2021-05-27"},{"gdhs_cumulative":850.9415871982366,"time":"2021-05-28"},{"gdhs_cumulative":871.4528264074586,"time":"2021-05-29"},{"gdhs_cumulative":890.1911365500484,"time":"2021-05-30"},{"gdhs_cumulative":906.2377887596891,"time":"2021-05-31"}]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieve-frost-hours": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Temperature Monitoring"
+        ],
+        "summary": "Retrieve Frost Hours",
+        "requestBody": {
+          "description": "Frost occurs when atmospheric moisture is directly crystallized on the ground and on exposed objects. In agricultural context, frost refers to the occurrence of subfreezing temperatures that affect plants and crops.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_unique_ref_code": {
+                    "type": "number",
+                    "description": "Field unique reference code"
+                  },
+                  "frost_temperature_threshold": {
+                    "type": "number",
+                    "description": "Temperature below which frost occurs"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "description": "Start of the growing season in ISO Datetime Format"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "description": "End of the growing season in ISO Datetime Format"
+                  }
+                },
+                "required": [
+                  "field_unique_ref_code",
+                  "frost_temperature_threshold",
+                  "start_date",
+                  "end_date"
+                ],
+                "example": {
+                  "field_unique_ref_code": "3933931894011",
+                  "frost_temperature_threshold": 0.0,
+                  "start_date": "2021-01-01T00:00:00.000000Z",
+                  "end_date": "2021-01-31T23:59:59.000000Z"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/frost-time"
+                  },
+                  "example": [{"time":"2021-01-17 04:00:00"},{"time":"2021-01-17 05:00:00"},{"time":"2021-01-17 06:00:00"},{"time":"2021-01-17
+07:00:00"},{"time":"2021-01-17 08:00:00"},{"time":"2021-01-17 09:00:00"},{"time":"2021-01-17
+10:00:00"},{"time":"2021-01-17 11:00:00"},{"time":"2021-01-17 12:00:00"},{"time":"2021-01-17
+13:00:00"},{"time":"2021-01-17 14:00:00"},{"time":"2021-01-17 15:00:00"},{"time":"2021-01-17
+16:00:00"},{"time":"2021-01-17 17:00:00"},{"time":"2021-01-17 18:00:00"},{"time":"2021-01-17
+19:00:00"},{"time":"2021-01-17 20:00:00"},{"time":"2021-01-17 21:00:00"},{"time":"2021-01-17
+22:00:00"},{"time":"2021-01-17 23:00:00"},{"time":"2021-01-18 00:00:00"},{"time":"2021-01-18
+01:00:00"},{"time":"2021-01-18 02:00:00"},{"time":"2021-01-18 03:00:00"},{"time":"2021-01-18
+04:00:00"},{"time":"2021-01-18 05:00:00"},{"time":"2021-01-18 06:00:00"},{"time":"2021-01-18
+07:00:00"},{"time":"2021-01-18 08:00:00"},{"time":"2021-01-18 09:00:00"},{"time":"2021-01-18
+10:00:00"},{"time":"2021-01-18 17:00:00"},{"time":"2021-01-18 18:00:00"},{"time":"2021-01-18
+19:00:00"},{"time":"2021-01-18 20:00:00"},{"time":"2021-01-18 21:00:00"},{"time":"2021-01-18
+22:00:00"},{"time":"2021-01-18 23:00:00"},{"time":"2021-01-19 23:00:00"},{"time":"2021-01-20
+00:00:00"},{"time":"2021-01-20 05:00:00"},{"time":"2021-01-20 06:00:00"},{"time":"2021-01-20
+07:00:00"},{"time":"2021-01-20 08:00:00"}]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "gdd": {
+        "type": "object",
+        "properties": {
+          "gdhs_cumulative": {
+            "type": "number",
+            "description": "Growing Degree Days"
+          },
+          "time": {
+            "type": "string",
+            "description": "Datetime"
+          }
+        }
+      },
+      "frost-time": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "description": "Datetime"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "description": "This defines the structure of an error",
+        "properties": {
+          "status": {
+            "type": "number",
+            "description": "error status"
+          },
+          "error": {
+            "type": "string",
+            "description": "error description"
+          }
+        },
+        "required": [
+          "status",
+          "error"
+        ],
+        "example": {
+          "status": 401,
+          "error": "No valid Access Token"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
