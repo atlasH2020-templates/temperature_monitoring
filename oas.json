@@ -3,7 +3,7 @@
   "info": {
     "title": "ATLAS temperature_monitoring Service Template",
     "description": "API description for service monitoring field temperature",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "tags": [
     {

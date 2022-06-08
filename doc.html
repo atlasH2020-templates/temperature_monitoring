@@ -1,0 +1,76 @@
+<html>
+<head>
+    <style type="text/css">
+        body { font-family: courier; font-size:12px; margin-left: 42px; width: 465px; white-space: pre-line; }
+        h2 { margin: 10px 0 0 -22px; font-size:12px; padding: 0 !important }
+        table { font-size: 10px; margin-left: -22px; width: 480px; }
+        div.header { padding: 0; margin: 0 0 0 -22px; white-space: pre-wrap; }
+    </style>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+</head>
+<body>
+
+<div class="header">
+ATLAS Service Template Specification
+Name                                       temperature_monitoring
+Version                                                     0.1.1
+Status                                                      DRAFT
+Author(s)                          Iphigenia Keramitsoglou (NOA),
+                                           Chris Kiranoudis (NOA)
+
+</div>
+
+<h2>The "temperature_monitoring" ATLAS Service Template</h2>
+<div style="margin-left: -22px;">
+Abstract
+
+Temperature is a major factor in determining the natural distribution of plants and the success and timing of agricultural crops. As temperature varies in space and time, it is important to monitor it continuously.
+
+The aim is to enable the development of services for air temperature that will then be used together with crop-specific characteristics to evaluate the Growing Degree Days (GDD) and hours of Frost.
+
+GDD is an indicator for assessing crop development. It is a measure of heat accumulation (based on air temperature) used to predict plant and pest development rates such as the date that a crop reaches maturity. Frost occurs when atmospheric moisture is directly crystallized on the ground and on exposed objects. In agricultural context, frost refers to the occurrence of subfreezing temperatures that affect plants and crops.
+
+This document describes a generic abstraction for measuring GDD and frost hours on a field.
+</div>
+<h2>Purpose of the Document</h2>
+
+The purpose of this service template specifications document is to provide a technology- agnostic overview of the temperature monitoring template. It describes a well-defined baseline of the service by clearly identifying the service version.
+
+The document describes the shared functional aspects of any service instance implementing the temperature monitoring template, the operational and business context of such services, possible requirements, relations to other services and validation aspects.
+
+<h2>Intended Audience</h2>
+
+ATLAS software vendors and project partners, who want to consume ATLAS temperature monitoring service instances.
+The services can be useful for the following groups: farmers, farmers associations, cooperatives, consultants, public organizations, water authorities.
+
+<h2>Functional Overview</h2>
+
+GDD and frost hours information derived from the Services implementing the temperature monitoring template can be used per se or as variables in irrigation management and sophisticated decision support systems.
+
+<h2>Operational context</h2>
+Growing Degree Days are a measure of heat accumulation. They are used to predict plant and animal development rates, e.g. bloom / maturity date. They are also used to predict when an insect will emerge from dormancy. The basic concept is that development will only occur if the average daily temperature (${\mathop{\mathrm TA}\nolimits^{average}_{daily}}$) exceeds some minimum development threshold, called the base temperature (TBASE). The base temperatures are different for each crop. If the mean temperature is at or below TBASE, then the Growing Degree Day value is zero. If the mean temperature is above TBASE, then the Growing Degree Day amount equals the mean temperature minus TBASE. GDD is a cumulative measure.
+
+$$ \mathop{\LARGE\mathrm GDD} =\LARGE\sum\nolimits^{Nov 15th}_{Apr 1st}\left(\mathop{\LARGE\mathrm TA}\nolimits^{average}_{daily} - TBASE \right)^+ $$
+
+As illustrated in the figure below, a farmer, with the support of his FMIS, may choose to retrieve the timeseries of the (cumulative) GDDs from the start of the growing season until the end (most commonly) present day and/or the hours of frost in a particular field.
+
+<img src="doc/context.png" width="300px" />
+
+<h2>Service template API Overview</h2>
+
+This section provides an abstract overview of the service template API. The detailed OpenAPI specifications can be found in the OpenAPI specifications.
+
+As every crop type has different base temperatures, for the calculation of GDD the field crop type is necessary, else the user can provide a threshold value. The GDDs are assessed for a time period, normally from the start of the growing season to the present day. The output is the daily timeseries of cumulative values of positive average temperature differences from the threshold.
+For the crop season, a frost threshold is required (by default it is zero degrees C). Then for a given date the output is the number of hours that the temperature was below the threshold.
+
+The detailed data models, with examples can be found in the adjoining OpenAPI specifications.
+</body>
+</html>
